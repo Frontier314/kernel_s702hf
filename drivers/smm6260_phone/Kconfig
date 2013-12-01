@@ -1,0 +1,36 @@
+#
+#
+#
+
+menuconfig SMM6260_PHONE
+	tristate "Smm6260 Phone Interface"
+	default n
+	---help---
+		smm6260 phone interface.
+if SMM6260_PHONE
+
+config SMM6260_MODEM
+	tristate "SMM6260 Modem support"
+	help
+	  Say Y here to enable SMM6260 modem control support.
+
+config SMM6260_MODEM_TTY
+	tristate "SMM6260 Modem virtual tty support"
+	depends on  SMM6260_MODEM
+	help
+	  Say Y here to enable SMM6260 modem virtual tty device support.
+
+config SMM6260_MODEM_NET
+	tristate "SMM6260 Modem virtual net support"
+	depends on  SMM6260_MODEM && NET
+	help
+	  Say Y here to enable SMM6260 modem virtual net device support.
+config SMM6260_MODEM_MAX_NUM
+	int "MAX rmnet supported,from 1~3"
+	range 1 3
+	default 3
+	depends on SMM6260_MODEM_NET
+	help
+	  Select the max rmnet dev supported.  
+endif # SMM6260_PHONE
+
